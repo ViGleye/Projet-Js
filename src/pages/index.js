@@ -32,15 +32,19 @@ export default function Home({ initialLocations }) {
     applyFilters()
   }
   const applyFilters = () => {
-    const filtered = initialLocations.filter((location) => {
-      return Object.keys(filters).every((key) => {
-        const filterValue = filters[key]
-        if (filterValue === "") return true
-        if (key === "isFree")
-          return location[key] === (filterValue === "Gratuit")
-        return location[key] === filterValue
-      })
-    })
+const filtered = initialLocations.filter((location) =>
+  Object.keys(filters).every((key) => {
+    const filterValue = filters[key]
+    if (filterValue === "") return true  
+
+    if (key === "isFree") {
+      return location[key] === (filterValue === "Gratuit")
+    }
+
+    return location[key] === filterValue
+  }),
+)
+
     setLocations(filtered)
   }
   const resetFilters = () => {
@@ -191,17 +195,14 @@ export default function Home({ initialLocations }) {
             onChange={(value) => handleFilterChange("typeOfParc", value)}
           />
           <Dropdown
-            title="Privé ou Public"
-            options={Array.from(
-              new Set(
-                initialLocations
-                  .filter((location) => location.type === "Parc")
-                  .map((location) => location.isPrivate),
-              ),
-            )}
-            selected={filters.isPrivate ? "Privé" : "Public"}
-            onChange={(value) => handleFilterChange("isPrivate", value)}
+            title="Accès"
+            options={["Public", "Privé"]}
+            selected={filters.isPrivate === true ? "Public" : "Privée"}
+            onChange={(value) =>
+              handleFilterChange("isPrivate", value === "Public")
+            }
           />
+          
           <Dropdown
             title="Accès"
             options={["Gratuit", "Payant"]}
