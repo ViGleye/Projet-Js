@@ -3,6 +3,7 @@ import Dropdown from "@/components/Dropdown"
 import * as Yup from "yup"
 import axios from "axios"
 import Button from "@/components/Button"
+
 import {
   restaurantType,
   type,
@@ -69,7 +70,7 @@ const LocationEditPage = ({ initialLocation }) => {
       await axios.patch(`http://localhost:3000/api/locations/${values._id}`, {
         values,
       })
-      router.push(`/locations/${values.id}`)
+      router.push(`/locations/${values._id}`)
     },
   })
 

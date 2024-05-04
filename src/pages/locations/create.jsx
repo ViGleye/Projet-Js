@@ -342,7 +342,7 @@ const Locationcreate = () => {
         <Button
           type="submit"
           text="Envoi"
-          onClick={() => console.log(formik.values)}
+          onClick={() => router.push("/")}
         ></Button>
       </form>
     </div>
